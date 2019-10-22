@@ -1,0 +1,36 @@
+version: '3'
+services:
+  nginx:
+    build:
+      context: ./nginx
+    image: streamy/nginx
+    ports:
+      - "1935:1935"
+      - "8000:80"
+    volumes:
+      - static_files:/static:ro
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./app
+    image: streamy/backend
+    env_file:
+      - django.env
+    expose:
+      - "8000"
+    volumes:
+      - static_files:/static
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    image: postgres:12-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  static_files:
