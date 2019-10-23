@@ -17,6 +17,8 @@ services:
     image: streamy/backend
     env_file:
       - django.env
+    environment:
+      - DJANGO_SETTINGS_MODULE=config.docker_settings
     expose:
       - "8000"
     volumes:
