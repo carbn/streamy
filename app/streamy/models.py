@@ -1,9 +1,8 @@
+from datetime import timedelta
 import functools
 
 from django.contrib.auth.models import User
 from django.db import models
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.crypto import get_random_string
@@ -12,31 +11,24 @@ from django.utils.crypto import get_random_string
 KEY_LENGTH = 20
 key_generator = functools.partial(get_random_string, KEY_LENGTH)
 
+NAME_LENGTH = 8
+name_generator = functools.partial(get_random_string, NAME_LENGTH)
+
 
 class Stream(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     key = models.CharField(max_length=KEY_LENGTH, default=key_generator, unique=True)
-    started_at = models.DateTimeField(null=True, blank=True)
+    name = models.CharField(max_length=NAME_LENGTH, default=name_generator, unique=True)
 
-    @property
-    def live(self):
-        return self.started_at is not None
+    updated_at = models.DateTimeField(null=True, blank=True)
 
     @property
     def url(self):
-        return reverse('hls-url', args=(self.user.username,))
+        return reverse('hls-url', args=(self.name,))
 
-    def start(self):
-        self.started_at = timezone.now()
-
-    def stop(self):
-        self.started_at = None
+    @property
+    def is_live(self):
+        return self.updated_at and self.updated_at + timedelta(seconds=25) > timezone.now()
 
     def __str__(self):
         return self.user.username
-
-
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Stream.objects.create(user=instance)

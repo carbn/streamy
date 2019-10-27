@@ -3,12 +3,9 @@ from django.urls import path
 from .views import internal
 
 
-def fake_view(*args, **kwargs):
-    raise Exception("This should never be called!")
-
-
 urlpatterns = [
-    path('internal/start_stream', internal.start_stream, name='start-stream'),
-    path('internal/stop_stream', internal.stop_stream, name='stop-stream'),
-    path('live/<username>/index.m3u8', fake_view, name='hls-url')
+    path('internal/on_publish', internal.on_publish, name='start-stream'),
+    path('internal/on_update', internal.on_update, name='update-stream'),
+    path('internal/on_publish_done', internal.on_publish_done, name='stop-stream'),
+    path('hls/<name>/index.m3u8', internal.hls, name='hls-url')
 ]
