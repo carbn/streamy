@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="player"></div>
+<script>
+    var player = new Clappr.Player({
+        source: "{{ stream.url }}",
+        parentId: "#player",
+        autoPlay: true,
+    });
+</script>
+{% endblock %}
