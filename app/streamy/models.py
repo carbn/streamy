@@ -24,7 +24,7 @@ class Stream(models.Model):
 
     @property
     def url(self):
-        return reverse('hls-url', args=(self.name,))
+        return reverse('flv-url', args=(self.name,))
 
     @property
     def is_live(self):

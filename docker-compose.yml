@@ -1,14 +1,22 @@
 version: '3'
 services:
   nginx:
-    build:
-      context: ./nginx
-    image: streamy/nginx
+    image: nginx:stable-alpine
     ports:
-      - "1935:1935"
       - "8000:80"
     volumes:
+      - ./nginx:/etc/nginx/conf.d:ro
       - static_files:/static:ro
+    restart: unless-stopped
+
+  nginx-flv:
+    build:
+      context: ./nginx-flv
+    image: streamy/nginx-flv
+    expose:
+      - "8000"
+    ports:
+      - "1935:1935"
     restart: unless-stopped
 
   backend:
