@@ -1,10 +1,17 @@
+from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseServerError
 from django.shortcuts import get_object_or_404, render
 
-from ..models import Stream
-
 
 def view(request, name):
-    stream = get_object_or_404(Stream, name=name)
+    stream = None
+
+    try:
+        user = User.objects.get(username=name)
+    except User.DoesNotExist:
+        user = None
+
+    if user:
+        stream = user.stream
 
     return render(request, 'stream/view.html', {'stream': stream})
