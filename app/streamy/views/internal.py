@@ -36,6 +36,6 @@ def on_publish_done(request):
     return HttpResponse()
 
 
-def flv(*args, **kwargs):
+def nop(*args, **kwargs):
     # this view is actually served by nginx-flv
     return HttpResponseServerError()

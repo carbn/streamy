@@ -11,7 +11,7 @@
                 var flvPlayer = flvjs.createPlayer({
                     type: 'flv',
                     isLive: true,
-                    url: '{{stream.url}}'
+                    url: '{{ stream.flv_url }}'
                 });
                 flvPlayer.attachMediaElement(element);
                 flvPlayer.load();

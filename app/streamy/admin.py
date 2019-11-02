@@ -11,7 +11,7 @@ class StreamAdmin(admin.ModelAdmin):
         fields = ['updated_at']
 
         if obj:
-            fields.append('url')
+            fields.append('flv_url')
 
         return fields
 

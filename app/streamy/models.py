@@ -23,8 +23,12 @@ class Stream(models.Model):
     updated_at = models.DateTimeField(null=True, blank=True)
 
     @property
-    def url(self):
+    def flv_url(self):
         return reverse('flv-url', args=(self.name,))
+
+    @property
+    def thumbnail_url(self):
+        return reverse('thumbnail-url', args=(self.name,))
 
     @property
     def is_live(self):
