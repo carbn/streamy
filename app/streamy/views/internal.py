@@ -34,8 +34,3 @@ def on_update(request):
 @csrf_exempt
 def on_publish_done(request):
     return HttpResponse()
-
-
-def nop(*args, **kwargs):
-    # this view is actually served by nginx-flv
-    return HttpResponseServerError()

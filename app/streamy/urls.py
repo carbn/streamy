@@ -1,13 +1,17 @@
 from django.urls import path
 
-from .views import home, internal, stream
+from .views import home, stream
+
+
+def nop(*args, **kwargs):
+    return HttpResponseServerError()
 
 
 urlpatterns = [
     path('', home.view, name='home'),
     path('stream/<name>/', stream.view, name='stream'),
-    path('live/<name>.flv', internal.nop, name='flv-url'),
-    path('thumb/<name>.png', internal.nop, name='thumbnail-url'),
+    path('live/<name>.flv', nop, name='flv-url'),
+    path('thumb/<name>.png', nop, name='thumbnail-url'),
 
     # for nginx-rtmp-module callbacks
     path('internal/on_publish', internal.on_publish, name='start-stream'),
