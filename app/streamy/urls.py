@@ -1,9 +1,10 @@
 from django.urls import path
 
-from .views import internal, stream
+from .views import home, internal, stream
 
 
 urlpatterns = [
+    path('', home.view, name='home'),
     path('stream/<name>/', stream.view, name='stream'),
     path('live/<name>.flv', internal.nop, name='flv-url'),
     path('thumb/<name>.png', internal.nop, name='thumbnail-url'),
