@@ -1,4 +1,6 @@
 #!/bin/sh
+set -e
+
 if [ "$DEBUG" = "True" ]; then
     LOG_LEVEL=debug
 else
