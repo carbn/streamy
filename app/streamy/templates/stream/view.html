@@ -1,12 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div id="player"></div>
-<script>
-    var player = new Clappr.Player({
-        source: "{{ stream.url }}",
-        parentId: "#player",
-        autoPlay: true,
-    });
-</script>
+<div class="row justify-content-md-center">
+    <div class="col-xl-10">
+        <!-- only muted autoplay is allowed in browsers -->
+        <video id="video-player" class="img-fluid" controls autoplay muted></video>
+        <script>
+            if (flvjs.isSupported()) {
+                var element = document.getElementById('video-player');
+                var flvPlayer = flvjs.createPlayer({
+                    type: 'flv',
+                    isLive: true,
+                    url: '{{stream.url}}'
+                });
+                flvPlayer.attachMediaElement(element);
+                flvPlayer.load();
+                flvPlayer.play();
+            }
+        </script>
+    </div>
+</div>
 {% endblock %}
