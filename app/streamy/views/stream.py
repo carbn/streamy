@@ -14,4 +14,4 @@ def view(request, name):
     if user:
         stream = user.stream
 
-    return render(request, 'stream/view.html', {'stream': stream})
+    return render(request, 'stream.html', {'stream': stream})
