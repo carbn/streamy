@@ -6,7 +6,7 @@
         <div class="col-xl-10">
             {% if stream %}
             <!-- only muted autoplay is allowed in browsers -->
-            <video id="video-player" class="img-fluid" poster="{{ stream.thumbnail_url }}" controls autoplay muted></video>
+            <video id="video-player" class="img-fluid" controls autoplay muted></video>
             <script>
                 if (flvjs.isSupported()) {
                     var element = document.getElementById('video-player');
