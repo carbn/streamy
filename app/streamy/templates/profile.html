@@ -3,24 +3,40 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <h3>Hello {{ user.username }}!</h3>
+        <div class="col">
+            <h3>Hello {{ user.username }}!</h3>
+        </div>
     </div>
     <div class="row">
-        <div class="card w-100">
-            <div class="card-header">Streaming settings</div>
-            <div class="card-body">
-                <form method="POST" action="{% url 'generate-stream-key' %}">
-                    {% csrf_token %}
-                    {% if user.stream %}
-                    <ul>
-                        <li>Server: <code>rtmp://{{ request.get_host }}/app</code></li>
-                        <li>Stream key: <code>{{ user.stream.key }}</code></li>
-                    </ul>
-                    <button type="submit" class="btn btn-sm btn-secondary float-right">Re-generate streaming key</button>
-                    {% else %}
-                        <button type="submit" class="btn btn-primary">Create streaming key</button>
-                    {% endif %}
-                </form>
+        <div class="col">
+            <div class="card w-100">
+                <div class="card-header">Streaming settings</div>
+                <div class="card-body">
+                    <form method="POST" action="{% url 'generate-stream-key' %}">
+                        {% csrf_token %}
+                        {% if user.stream %}
+                        <div class="row">
+                            <div class="col-md-2">Server</div>
+                            <div class="col-md-auto"><code>rtmp://{{ request.get_host }}/app</code></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">Stream key</div>
+                            <div class="col-md-auto"><code>{{ user.stream.key }}</code></div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-sm btn-secondary float-right">Re-generate streaming key</button>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary">Create streaming key</button>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </form>
+                </div>
             </div>
         </div>
     </div>

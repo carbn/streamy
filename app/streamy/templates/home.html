@@ -2,24 +2,26 @@
 
 {% block content %}
 <div class="container">
-    <div class="col-xl-12">
-        <h3>Live now</h3>
-        {% if streams %}
-            <div class="card-deck">
-            {% for stream in streams %}
-                <div class="card" style="max-width: 17rem;">
-                    <a href="{% url 'stream' stream.user.username %}" class="stretched-link">
-                        <img class="card-img-top" src="{{ stream.thumbnail_url }}" alt="Thumbnail">
-                    </a>
-                    <div class="card-body">
-                        <h5>{{ stream.user.username }}</h5>
+    <div class="row">
+        <div class="col-xl-12">
+            <h3>Live now</h3>
+            {% if streams %}
+                <div class="card-deck">
+                {% for stream in streams %}
+                    <div class="card" style="max-width: 17rem;">
+                        <a href="{% url 'stream' stream.user.username %}" class="stretched-link">
+                            <img class="card-img-top" src="{{ stream.thumbnail_url }}" alt="Thumbnail">
+                        </a>
+                        <div class="card-body">
+                            <h5>{{ stream.user.username }}</h5>
+                        </div>
                     </div>
+                {% endfor %}
                 </div>
-            {% endfor %}
-            </div>
-        {% else %}
-            <p>Sorry, no-one is currently streaming!</p>
-        {% endif %}
+            {% else %}
+                <p>Sorry, no-one is currently streaming!</p>
+            {% endif %}
+        </div>
     </div>
 </div>
 {% endblock %}
