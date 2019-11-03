@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    {% if form.errors %}
+    <div class="row">
+        <div class="col alert alert-danger">
+            Your username and password didn't match. Please try again.
+        </div>
+    </div>
+    {% endif %}
+
+    {% if next %}
+    <div class="row">
+        {% if user.is_authenticated %}
+        <div class="col alert alert-warning">
+            Your account doesn't have access to this page. To proceed, please login with an account that has access.
+        </div>
+        {% else %}
+        <div class="col alert alert-primary">
+            Please login to see this page.
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card">
+                <h5 class="card-header">
+                    Sign in
+                </h5>
+                <div class="card-body">
+                    <form method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input name="username" type="text" class="form-control" placeholder="Username" required autofocus>
+                        </div>
+                        <div class="form-group">
+                            <input name="password" type="password" class="form-control" placeholder="Password" required>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Sign in</button>
+                            <input type="hidden" name="next" value="{{ next }}">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

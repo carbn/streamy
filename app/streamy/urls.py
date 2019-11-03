@@ -1,6 +1,7 @@
-from django.urls import path
+from django.contrib.auth.views import LoginView, LogoutView
+from django.urls import include, path
 
-from .views import home, stream
+from .views import home, internal, stream
 
 
 def nop(*args, **kwargs):
@@ -9,6 +10,8 @@ def nop(*args, **kwargs):
 
 urlpatterns = [
     path('', home.view, name='home'),
+    path('login/', LoginView.as_view(template_name='login.html'), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
     path('stream/<name>/', stream.view, name='stream'),
     path('live/<name>.flv', nop, name='flv-url'),
     path('thumb/<name>.png', nop, name='thumbnail-url'),

@@ -1,29 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="row justify-content-md-center">
-    <div class="col-xl-10">
-        {% if stream %}
-        <!-- only muted autoplay is allowed in browsers -->
-        <video id="video-player" class="img-fluid" poster="{{ stream.thumbnail_url }}" controls autoplay muted></video>
-        <script>
-            if (flvjs.isSupported()) {
-                var element = document.getElementById('video-player');
-                var flvPlayer = flvjs.createPlayer({
-                    type: 'flv',
-                    isLive: true,
-                    url: '{{ stream.flv_url }}'
-                });
-                flvPlayer.attachMediaElement(element);
-                flvPlayer.load();
-                flvPlayer.play();
-            }
-        </script>
-        {% else %}
-        <div class="alert alert-info">
-            Stream not found
+<div class="container-fluid">
+    <div class="row justify-content-md-center">
+        <div class="col-xl-10">
+            {% if stream %}
+            <!-- only muted autoplay is allowed in browsers -->
+            <video id="video-player" class="img-fluid" poster="{{ stream.thumbnail_url }}" controls autoplay muted></video>
+            <script>
+                if (flvjs.isSupported()) {
+                    var element = document.getElementById('video-player');
+                    var flvPlayer = flvjs.createPlayer({
+                        type: 'flv',
+                        isLive: true,
+                        url: '{{ stream.flv_url }}'
+                    });
+                    flvPlayer.attachMediaElement(element);
+                    flvPlayer.load();
+                    flvPlayer.play();
+                }
+            </script>
+            {% else %}
+            <div class="alert alert-info">
+                Stream not found
+            </div>
+            {% endif %}
         </div>
-        {% endif %}
     </div>
 </div>
 {% endblock %}

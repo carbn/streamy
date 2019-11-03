@@ -1,7 +1,7 @@
 from datetime import timedelta
 
 from django.http import HttpResponse, HttpResponseServerError
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import render
 from django.utils import timezone
 
 from ..models import Stream
