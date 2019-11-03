@@ -34,5 +34,9 @@ class Stream(models.Model):
     def is_live(self):
         return self.updated_at and self.updated_at + timedelta(seconds=25) > timezone.now()
 
+    def regenerate_keys(self):
+        self.key = key_generator()
+        self.name = name_generator()
+
     def __str__(self):
         return self.user.username

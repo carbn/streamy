@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <h3>Hello {{ user.username }}!</h3>
+    </div>
+    <div class="row">
+        <div class="card w-100">
+            <div class="card-header">Streaming settings</div>
+            <div class="card-body">
+                <form method="POST" action="{% url 'generate-stream-key' %}">
+                    {% csrf_token %}
+                    {% if user.stream %}
+                    <ul>
+                        <li>Server: <code>rtmp://{{ request.get_host }}/app</code></li>
+                        <li>Stream key: <code>{{ user.stream.key }}</code></li>
+                    </ul>
+                    <button type="submit" class="btn btn-sm btn-secondary float-right">Re-generate streaming key</button>
+                    {% else %}
+                        <button type="submit" class="btn btn-primary">Create streaming key</button>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
