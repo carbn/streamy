@@ -10,6 +10,7 @@
 
         <div class="col-xl-8">
             <!-- only muted autoplay is allowed in browsers -->
+            <div class="video-overlay d-flex justify-content-center align-items-center" onClick="unmute(this); return false;">Click to unmute video</div>
             <video id="video-player" controls muted autoplay></video>
             <script>
                 if (flvjs.isSupported()) {
@@ -22,6 +23,12 @@
                     flvPlayer.attachMediaElement(element);
                     flvPlayer.load();
                     flvPlayer.play();
+                }
+
+                function unmute(overlayElement) {
+                    var videoElement = document.getElementById('video-player');
+                    videoElement.muted = false;
+                    overlayElement.style.visibility = 'hidden';
                 }
             </script>
         </div>
