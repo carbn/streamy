@@ -2,3 +2,11 @@ video {
     display: block;
     width: 100%;
 }
+
+.card {
+    max-width: 17rem;
+}
+
+.card-body {
+    padding: 0.5rem;
+}

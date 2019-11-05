@@ -8,12 +8,12 @@
             {% if streams %}
                 <div class="card-deck">
                 {% for stream in streams %}
-                    <div class="card" style="max-width: 17rem;">
+                    <div class="card">
                         <a href="{% url 'stream' stream.user.username %}" class="stretched-link">
                             <img class="card-img-top" src="{{ stream.thumbnail_url }}" alt="Thumbnail">
                         </a>
                         <div class="card-body">
-                            <h5>{{ stream.user.username }}</h5>
+                            {{ stream.user.username }}
                         </div>
                     </div>
                 {% endfor %}
