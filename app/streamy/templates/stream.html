@@ -8,7 +8,7 @@
         {% if stream %}
         <div class="col-xl-8">
             <!-- only muted autoplay is allowed in browsers -->
-            <div class="video-overlay d-flex justify-content-center align-items-center" onClick="unmute(this); return false;">Click to unmute video</div>
+            <div class="video-overlay d-flex justify-content-center align-items-center" onClick="unmute(this); return false;">Click to unmute</div>
             <video id="video-player" controls muted autoplay></video>
             <script>
                 if (flvjs.isSupported()) {
@@ -21,6 +21,12 @@
                     flvPlayer.attachMediaElement(element);
                     flvPlayer.load();
                     flvPlayer.play();
+
+                    setTimeout(function() {
+                        console.log('timeout');
+                        var overlayElement = document.querySelector('.video-overlay')
+                        overlayElement.style.visibility = 'hidden';
+                    }, 3000);
                 }
 
                 function unmute(overlayElement) {
