@@ -8,6 +8,10 @@ video {
     width: 100%;
 }
 
+.video-container {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
 .video-overlay {
     width: calc(100% - 30px);
     height: 100%;
