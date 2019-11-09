@@ -16,10 +16,16 @@ name_generator = functools.partial(get_random_string, NAME_LENGTH)
 
 
 class Stream(models.Model):
+    PRIVACY_CHOICES = (
+        ('public', 'Public'),
+        ('unlisted', 'Unlisted'),
+        #('followers', 'Followers only'),
+    )
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     key = models.CharField(max_length=KEY_LENGTH, default=key_generator, unique=True)
     name = models.CharField(max_length=NAME_LENGTH, default=name_generator, unique=True)
-
+    privacy = models.CharField(max_length=12, choices=PRIVACY_CHOICES, default='public')
     updated_at = models.DateTimeField(null=True, blank=True)
 
     @property

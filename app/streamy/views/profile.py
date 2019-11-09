@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from django.views.decorators.http import require_POST
 
+from ..forms.profile import ProfileForm
 from ..models import Stream
 
 
@@ -9,7 +10,17 @@ from ..models import Stream
 def view(request):
     user = request.user
 
-    return render(request, 'profile.html', {'user': user})
+    if request.method == 'POST':
+        form = ProfileForm(request.POST)
+
+        if form.is_valid():
+            user.stream.privacy = form.cleaned_data['privacy']
+            user.stream.save()
+    else:
+        form = ProfileForm(instance=user.stream)
+
+    return render(request, 'profile.html', {'user': user, 'form': form})
+
 
 @login_required
 @require_POST
