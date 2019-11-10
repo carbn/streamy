@@ -25,6 +25,8 @@ class Stream(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     key = models.CharField(max_length=KEY_LENGTH, default=key_generator, unique=True)
     name = models.CharField(max_length=NAME_LENGTH, default=name_generator, unique=True)
+    title = models.CharField(max_length=128, blank=True)
+    description = models.TextField(blank=True)
     privacy = models.CharField(max_length=12, choices=PRIVACY_CHOICES, default='public')
     updated_at = models.DateTimeField(null=True, blank=True)
 

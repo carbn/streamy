@@ -8,7 +8,7 @@ from ..models import Stream
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Stream
-        fields = ['privacy']
+        fields = ['title', 'description', 'privacy']
 
     def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
