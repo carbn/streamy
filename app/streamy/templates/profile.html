@@ -19,11 +19,11 @@
                         {% if user.stream %}
                         <div class="row">
                             <div class="col-md-2">Server</div>
-                            <div class="col-md-auto"><code>rtmp://{{ request.get_host }}/app</code></div>
+                            <div class="col-md-6"><code>rtmp://{{ request.get_host }}/app</code></div>
                         </div>
                         <div class="row">
                             <div class="col-md-2">Stream key</div>
-                            <div class="col-md-auto"><code>{{ user.stream.key }}</code></div>
+                            <div class="col-md-6"><code>{{ user.stream.key }}</code></div>
                         </div>
                         <div class="row mt-3">
                             <div class="col">

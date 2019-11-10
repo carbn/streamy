@@ -13,7 +13,11 @@
                             <img class="card-img-top" src="{{ stream.thumbnail_url }}" alt="Thumbnail">
                         </a>
                         <div class="card-body">
-                            {{ stream.user.username }}
+                            <span class="text-truncate">
+                                <b>{{ stream.title }}</b>
+                                <br />
+                                {{ stream.user.username }}
+                            </span>
                         </div>
                     </div>
                 {% endfor %}
