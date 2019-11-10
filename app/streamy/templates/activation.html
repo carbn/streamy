@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">Stream activation</div>
+                <div class="card-body">
+                    {% crispy form %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseServerError, HttpResponseRedirect
+from django.http import HttpResponse
 from django.shortcuts import redirect, get_object_or_404
 from django.utils import timezone
 from django.views.decorators.http import require_POST

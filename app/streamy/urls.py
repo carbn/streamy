@@ -12,6 +12,7 @@ def nop(*args, **kwargs):
 urlpatterns = [
     path('', home.view, name='home'),
     path('profile/', profile.view, name='profile'),
+    path('profile/activate', profile.activation_view, name='activate'),
     path('profile/generate-key', profile.generate_stream_key_view, name='generate-stream-key'),
     path('stream/<name>/', stream.view, name='stream'),
 

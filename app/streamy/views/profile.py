@@ -2,13 +2,38 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from django.views.decorators.http import require_POST
 
-from ..forms.profile import ProfileForm
+from ..forms.profile import ActivationForm, ProfileForm
 from ..models import Stream
+
+
+@login_required
+def activation_view(request):
+    user = request.user
+
+    if hasattr(user, 'stream'):
+        return redirect('profile')
+
+    if request.method == 'POST':
+        form = ActivationForm(request.POST)
+
+        if form.is_valid():
+            stream = form.save(commit=False)
+            stream.user = request.user
+            stream.save()
+
+            return redirect('profile')
+    else:
+        form = ActivationForm()
+
+    return render(request, 'activation.html', {'form': form})
 
 
 @login_required
 def view(request):
     user = request.user
+
+    if not hasattr(user, 'stream'):
+        return redirect('activate')
 
     if request.method == 'POST':
         form = ProfileForm(request.POST, instance=user.stream)

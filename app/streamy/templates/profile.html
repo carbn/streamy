@@ -16,7 +16,6 @@
                 <div class="card-body">
                     <form method="POST" action="{% url 'generate-stream-key' %}">
                         {% csrf_token %}
-                        {% if user.stream %}
                         <div class="row">
                             <div class="col-md-2">Server</div>
                             <div class="col-md-6"><code>rtmp://{{ request.get_host }}/app</code></div>
@@ -30,13 +29,6 @@
                                 <button type="submit" class="btn btn-sm btn-outline-secondary">Re-generate streaming key</button>
                             </div>
                         </div>
-                        {% else %}
-                        <div class="row">
-                            <div class="col">
-                                <button type="submit" class="btn btn-primary">Create streaming key</button>
-                            </div>
-                        </div>
-                        {% endif %}
                     </form>
                 </div>
             </div>
