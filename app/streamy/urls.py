@@ -1,4 +1,5 @@
 from django.contrib.auth.views import LoginView, LogoutView
+from django.http import HttpResponseServerError
 from django.urls import include, path
 
 from .views import home, internal, profile, stream
