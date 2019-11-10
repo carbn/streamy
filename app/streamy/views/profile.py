@@ -11,11 +11,10 @@ def view(request):
     user = request.user
 
     if request.method == 'POST':
-        form = ProfileForm(request.POST)
+        form = ProfileForm(request.POST, instance=user.stream)
 
         if form.is_valid():
-            user.stream.privacy = form.cleaned_data['privacy']
-            user.stream.save()
+            form.save()
     else:
         form = ProfileForm(instance=user.stream)
 
