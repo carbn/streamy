@@ -19,19 +19,20 @@ Backend is implemented using [django](https://www.djangoproject.com/).
 Transcoding is not currently supported and all streams are at source quality.
 
 
-## Usage (deployment)
+## Usage (development)
 
 Create a `django.env` with the following contents:
 
     SECRET_KEY=yoursecretkey
+    DEBUG=True
 
 Start the containers:
 
-    docker-compose up --build -d
+    docker-compose -f docker-compose.yml -f dev.yml up --build -d
 
 Create a superuser:
 
-    docker-compose run --rm backend python manage.py createsuperuser
+    docker-compose -f docker-compose.yml -f dev.yml run --rm backend python manage.py createsuperuser
 
 The backend is now available at [http://localhost:8000](http://localhost:8000).
 

@@ -2,13 +2,10 @@ version: '2'
 services:
   nginx:
     image: nginx:stable-alpine
-    ports:
-      - "8000:80"
     volumes:
       - ./nginx:/etc/nginx/conf.d:ro
       - static_files:/static:ro
       - video_thumbnails:/thumbs:ro
-    restart: unless-stopped
 
   nginx-flv:
     build:
@@ -20,7 +17,6 @@ services:
       - "1935:1935"
     volumes:
       - video_thumbnails:/thumbs
-    restart: unless-stopped
 
   backend:
     build:
@@ -36,13 +32,11 @@ services:
       - static_files:/static
     depends_on:
       - db
-    restart: unless-stopped
 
   db:
     image: postgres:12-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    restart: unless-stopped
 
   fix-thumbnail-permissions:
     image: nginx:stable-alpine

@@ -1,0 +1,17 @@
+version: '2'
+services:
+  nginx:
+    ports:
+      - "127.0.0.1:8089:80"
+    restart: unless-stopped
+
+  nginx-flv:
+    restart: unless-stopped
+
+  backend:
+    restart: unless-stopped
+
+  db:
+    volumes:
+      - /var/lib/postgresql/streamy:/var/lib/postgresql/data/
+    restart: unless-stopped

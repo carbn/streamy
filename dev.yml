@@ -1,0 +1,5 @@
+version: '2'
+services:
+  nginx:
+    ports:
+      - "127.0.0.1:8000:80"
