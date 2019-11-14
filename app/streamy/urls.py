@@ -18,7 +18,7 @@ urlpatterns = [
 
     # nop urls for reverse queries
     path('live/<name>.flv', nop, name='flv-url'),
-    path('thumb/<name>.png', nop, name='thumbnail-url'),
+    path('thumb/<name>.jpg', nop, name='thumbnail-url'),
 
     # login/logout
     path('login/', LoginView.as_view(template_name='login.html'), name='login'),
