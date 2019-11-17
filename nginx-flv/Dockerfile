@@ -128,6 +128,7 @@ LABEL MAINTAINER Alfred Gutierrez <alf.g.jr@gmail.com>
 
 RUN apk add --update \
   ca-certificates \
+  curl \
   openssl \
   pcre \
   lame \
@@ -153,6 +154,7 @@ RUN ln -sf /dev/stdout /usr/local/nginx/logs/access.log && \
     ln -sf /dev/stderr /usr/local/nginx/logs/error.log
 
 COPY nginx.conf /etc/nginx/nginx.conf
+COPY update_meta.sh /bin/update_meta.sh
 
 EXPOSE 1935
 EXPOSE 8000

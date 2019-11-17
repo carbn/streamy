@@ -28,4 +28,5 @@ urlpatterns = [
     path('internal/on_publish', internal.on_publish, name='start-stream'),
     path('internal/on_update', internal.on_update, name='update-stream'),
     path('internal/on_publish_done', internal.on_publish_done, name='stop-stream'),
+    path('internal/update_meta/<name>', internal.update_meta, name='update-meta'),
 ]

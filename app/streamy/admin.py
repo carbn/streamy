@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Stream
+from .models import Stream, StreamMeta
 
 
 @admin.register(Stream)
@@ -19,3 +19,6 @@ class StreamAdmin(admin.ModelAdmin):
         return obj.is_live
 
     is_live.boolean = True
+
+
+admin.site.register(StreamMeta)

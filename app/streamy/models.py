@@ -2,6 +2,7 @@ from datetime import timedelta
 import functools
 
 from django.contrib.auth.models import User
+from django.contrib.postgres.fields import JSONField
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
@@ -48,3 +49,13 @@ class Stream(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+class StreamMeta(models.Model):
+    stream = models.OneToOneField(Stream, on_delete=models.CASCADE)
+
+    audio = JSONField()
+    video = JSONField()
+
+    def __str__(self):
+        return str(self.stream)
