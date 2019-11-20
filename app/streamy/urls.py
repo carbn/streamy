@@ -14,7 +14,8 @@ urlpatterns = [
     path('profile/', profile.view, name='profile'),
     path('profile/activate', profile.activation_view, name='activate'),
     path('profile/generate-key', profile.generate_stream_key_view, name='generate-stream-key'),
-    path('stream/<name>/', stream.view, name='stream'),
+    path('user/<name>/', stream.user_view, name='stream'),
+    path('stream/<name>/', stream.stream_view, name='stream-link'),
 
     # nop urls for reverse queries
     path('live/<name>.flv', nop, name='flv-url'),

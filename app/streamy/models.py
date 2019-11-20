@@ -20,7 +20,7 @@ class Stream(models.Model):
     PRIVACY_CHOICES = (
         ('public', 'Public'),
         ('unlisted', 'Unlisted'),
-        #('followers', 'Followers only'),
+        ('link', 'Link'),
     )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -30,6 +30,16 @@ class Stream(models.Model):
     description = models.TextField(blank=True)
     privacy = models.CharField(max_length=12, choices=PRIVACY_CHOICES, default='public')
     updated_at = models.DateTimeField(null=True, blank=True)
+
+    @property
+    def watch_url(self):
+        opts = {
+            'public':  reverse('stream', args=(self.user.username,)),
+            'private': reverse('stream', args=(self.user.username,)),
+            'link':    reverse('stream-link', args=(self.name,)),
+        }
+
+        return opts[self.privacy]
 
     @property
     def flv_url(self):
