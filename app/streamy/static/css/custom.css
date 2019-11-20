@@ -23,6 +23,7 @@ video {
 }
 
 .card-deck .card {
+    border: 0;
     max-width: 17rem;
 }
 

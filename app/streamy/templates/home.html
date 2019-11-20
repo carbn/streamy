@@ -10,7 +10,7 @@
                 {% for stream in streams %}
                     <div class="card">
                         <a href="{% url 'stream' stream.user.username %}" class="stretched-link">
-                            <img class="card-img-top" src="{{ stream.thumbnail_url }}" alt="Thumbnail">
+                            <img class="card-img" src="{{ stream.thumbnail_url }}" alt="Thumbnail">
                         </a>
                         <div class="card-body">
                             <span class="text-truncate">
