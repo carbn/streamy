@@ -9,7 +9,7 @@
         <div class="col-xl-8">
             <!-- only muted autoplay is allowed in browsers -->
             <div class="video-overlay d-flex justify-content-center align-items-center" onClick="unmute(this); return false;">Click to unmute</div>
-            <video id="video-player" controls muted autoplay></video>
+            <video id="video-player" poster="{{ stream.thumbnail_url }}" controls muted autoplay></video>
             <script>
                 if (flvjs.isSupported()) {
                     var element = document.getElementById('video-player');
