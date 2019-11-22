@@ -11,10 +11,13 @@
         <title>Streamy</title>
     </head>
     <body>
-        <nav class="navbar navbar-expand-md navbar-light bg-light {% block top-margin %}mb-4{% endblock %}">
+        <nav class="navbar navbar-expand-sm navbar-light bg-light {% block top-margin %}mb-4{% endblock %}">
             <a class="navbar-brand" href="/"><i class="material-icons">live_tv</i> Streamy</a>
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-toggle" aria-controls="navbar-toggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar-toggle">
+                <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
                         {% url 'home' as url %}
                         <a class="nav-link {% if request.path == url %}active{% endif %}" href="{{ url }}">Browse</a>
@@ -31,21 +34,23 @@
                         </li>
                     {% endif %}
                 </ul>
+                <form class="form-inline">
+                    {% if request.user.is_authenticated %}
+                        <span class="mr-3">
+                            Hello {{ request.user.username }}
+                        </span>
+                        <a class="btn btn-outline-secondary btn-sm" href="{% url 'logout' %}" >Logout</a>
+                    {% else %}
+                        <a class="btn btn-outline-primary btn-sm" href="{% url 'login' %}">Login</a>
+                    {% endif %}
+                </form>
             </div>
-            <form class="form-inline">
-                {% if request.user.is_authenticated %}
-                    <span class="mx-2">
-                        Hello {{ request.user.username }}
-                    </span>
-                    <a class="btn btn-outline-secondary btn-sm" href="{% url 'logout' %}" >Logout</a>
-                {% else %}
-                    <a class="btn btn-outline-primary btn-sm" href="{% url 'login' %}">Login</a>
-                {% endif %}
-            </form>
         </nav>
         <div>
             {% block content %}
             {% endblock %}
         </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
 </html>
