@@ -3,8 +3,8 @@
 {% block top-margin %}{% endblock %}
 
 {% block content %}
-<div class="container-fluid video-container">
-    <div class="row justify-content-md-center">
+<div class="container-fluid">
+    <div class="row justify-content-md-center video-container">
         {% if stream %}
         <div class="col-xl-8">
             <!-- only muted autoplay is allowed in browsers -->
@@ -35,6 +35,13 @@
                     overlayElement.style.visibility = 'hidden';
                 }
             </script>
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-xl-8">
+            <b>{{ stream.title }}</b>
+            <br />
+            {{ stream.user.username }}
         </div>
         {% else %}
         <div class="col-md-4 alert alert-secondary">
