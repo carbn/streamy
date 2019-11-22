@@ -2,9 +2,9 @@
 set -e
 
 if [ "$DEBUG" = "True" ]; then
-    LOG_LEVEL=debug
+    FLAGS="--log-level=debug --reload"
 else
-    LOG_LEVEL=info
+    FLAGS="--log-level=info"
 fi
 
 echo "Waiting for postgres..."
@@ -18,4 +18,4 @@ echo "PostgreSQL started"
 python manage.py migrate
 python manage.py collectstatic --no-input
 
-gunicorn -b 0.0.0.0:8000 config.wsgi:application --log-level=$LOG_LEVEL
+gunicorn -b 0.0.0.0:8000 config.wsgi:application $FLAGS
