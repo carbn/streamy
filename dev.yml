@@ -3,3 +3,6 @@ services:
   nginx:
     ports:
       - "127.0.0.1:8000:80"
+  backend:
+    volumes:
+      - ./app:/src:ro
