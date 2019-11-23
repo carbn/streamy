@@ -8,7 +8,7 @@
     <div class="row justify-content-md-center video-container">
         <div class="col-xl-8 px-0">
             <!-- only muted autoplay is allowed in browsers -->
-            <div class="video-overlay d-flex justify-content-center align-items-center" onClick="unmute(this); return false;">Click to unmute</div>
+            <div class="video-overlay d-flex justify-content-center align-items-center" onClick="unmute(); return false;">Click to unmute</div>
             <video id="video-player" poster="{{ stream.thumbnail_url }}" controls muted></video>
             <script>
                 if (flvjs.isSupported()) {
@@ -23,16 +23,16 @@
                     flvPlayer.play();
 
                     setTimeout(function() {
-                        console.log('timeout');
-                        var overlayElement = document.querySelector('.video-overlay')
-                        overlayElement.style.visibility = 'hidden';
+                        var elem = $('.video-overlay');
+                        if (elem.is(':visible')) {
+                            elem.empty().toggleClass('d-flex').fadeOut('slow');
+                        }
                     }, 5000);
                 }
 
-                function unmute(overlayElement) {
-                    var videoElement = document.getElementById('video-player');
-                    videoElement.muted = false;
-                    overlayElement.style.visibility = 'hidden';
+                function unmute() {
+                    $('#video-player').prop('muted', false);
+                    $('.video-overlay').toggleClass('d-flex').hide();
                 }
             </script>
         </div>
