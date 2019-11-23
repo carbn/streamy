@@ -1,16 +1,13 @@
 version: '2'
 services:
   nginx:
-    image: nginx:stable-alpine
+    build: nginx
     volumes:
-      - ./nginx:/etc/nginx/conf.d:ro
       - static_files:/static:ro
       - video_thumbnails:/thumbs:ro
 
   nginx-flv:
-    build:
-      context: ./nginx-flv
-    image: streamy/nginx-flv
+    build: nginx-flv
     expose:
       - "8000"
     ports:
@@ -19,9 +16,7 @@ services:
       - video_thumbnails:/thumbs
 
   backend:
-    build:
-      context: ./app
-    image: streamy/backend
+    build: app
     env_file:
       - django.env
     environment:
