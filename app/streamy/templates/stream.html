@@ -4,8 +4,8 @@
 
 {% block content %}
 <div class="container-fluid">
+    {% if stream %}
     <div class="row justify-content-md-center video-container">
-        {% if stream %}
         <div class="col-xl-8 px-0">
             <!-- only muted autoplay is allowed in browsers -->
             <div class="video-overlay d-flex justify-content-center align-items-center" onClick="unmute(this); return false;">Click to unmute</div>
@@ -43,11 +43,13 @@
             <br />
             {{ stream.user.username }}
         </div>
-        {% else %}
+    </div>
+    {% else %}
+    <div class="row justify-content-md-center mt-4">
         <div class="col-md-4 alert alert-secondary">
             Stream not found
         </div>
-        {% endif %}
     </div>
+    {% endif %}
 </div>
 {% endblock %}
