@@ -7,6 +7,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.crypto import get_random_string
+from django.utils.translation import gettext_lazy as _
 
 
 KEY_LENGTH = 20
@@ -17,26 +18,25 @@ name_generator = functools.partial(get_random_string, NAME_LENGTH)
 
 
 class Stream(models.Model):
-    PRIVACY_CHOICES = (
-        ('public', 'Public'),
-        ('unlisted', 'Unlisted'),
-        ('link', 'Link'),
-    )
+    class PrivacyMode(models.TextChoices):
+        PUBLIC = 'public', _('Public'),
+        UNLISTED = 'unlisted', _('Unlisted'),
+        LINK = 'link', _('Link'),
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     key = models.CharField(max_length=KEY_LENGTH, default=key_generator, unique=True)
     name = models.CharField(max_length=NAME_LENGTH, default=name_generator, unique=True)
     title = models.CharField(max_length=128)
     description = models.TextField(blank=True)
-    privacy = models.CharField(max_length=12, choices=PRIVACY_CHOICES, default='public')
+    privacy = models.CharField(max_length=12, choices=PrivacyMode.choices, default=PrivacyMode.PUBLIC)
     updated_at = models.DateTimeField(null=True, blank=True)
 
     @property
     def watch_url(self):
         opts = {
-            'public':  reverse('stream', args=(self.user.username,)),
-            'private': reverse('stream', args=(self.user.username,)),
-            'link':    reverse('stream-link', args=(self.name,)),
+            Stream.PrivacyMode.PUBLIC: reverse('stream', args=(self.user.username,)),
+            Stream.PrivacyMode.UNLISTED: reverse('stream', args=(self.user.username,)),
+            Stream.PrivacyMode.LINK: reverse('stream-link', args=(self.name,)),
         }
 
         return opts[self.privacy]
