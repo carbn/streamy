@@ -12,7 +12,9 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-sm navbar-light bg-light {% block top-margin %}mb-4{% endblock %}">
-            <a class="navbar-brand" href="/"><i class="material-icons">live_tv</i> Streamy</a>
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{% static 'img/logo_50px.png' %}" class="d-inline-block align-top" alt="streamy">
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-toggle" aria-controls="navbar-toggle" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

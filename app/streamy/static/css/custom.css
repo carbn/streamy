@@ -1,6 +1,5 @@
-.navbar-brand .material-icons {
-    font-size: 1.0rem;
-    color: #1678b3;
+.navbar-brand img {
+    height: 30px;
 }
 
 video {
