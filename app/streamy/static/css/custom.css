@@ -33,3 +33,7 @@ video {
 .asteriskField {
     display: none;
 }
+
+span.live {
+    color: #e80000;
+}
