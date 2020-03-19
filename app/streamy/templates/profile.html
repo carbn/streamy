@@ -3,16 +3,17 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            <h3>Hello {{ user.username }}!</h3>
+            <h3>Profile settings</h3>
         </div>
     </div>
     <div class="row justify-content-center">
         <div class="col-lg-8">
             <div class="card mb-4">
-                <div class="card-header">Stream keys</div>
+                <div class="card-header">Publishing keys</div>
                 <div class="card-body">
                     <form method="POST" action="{% url 'generate-stream-key' %}">
                         {% csrf_token %}
@@ -34,9 +35,10 @@
             </div>
         </div>
     </div>
+
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            <div class="card">
+            <div class="card mb-4">
                 <div class="card-header">Stream settings</div>
                 <div class="card-body">
                     {% crispy form %}
